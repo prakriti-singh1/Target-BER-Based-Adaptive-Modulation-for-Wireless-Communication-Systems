@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="820" viewBox="0 0 1200 820">
+  <defs>
+    <style>
+      text { font-family: 'DejaVu Sans', Arial, sans-serif; }
+      .axis { stroke: #111; stroke-width: 1.5; }
+      .grid { stroke: #222; stroke-width: 1; opacity: 0.75; }
+      .label { font-size: 28px; fill: #111; }
+      .tick { font-size: 20px; fill: #111; }
+      .legend { font-size: 28px; fill: #111; }
+      .line-bpsk { fill: none; stroke: #1f77b4; stroke-width: 2.5; }
+      .line-qpsk { fill: none; stroke: #d62728; stroke-width: 2.5; }
+      .line-qam { fill: none; stroke: #f4a300; stroke-width: 2.5; }
+    </style>
+  </defs>
+  <rect x="0" y="0" width="1200" height="820" fill="#f3f3f3"/>
+  <g id="chart"></g>
+  <script><![CDATA[
+    const svgNS = 'http://www.w3.org/2000/svg';
+    const chart = document.getElementById('chart');
+    function add(tag, attrs, parent = chart) {
+      const el = document.createElementNS(svgNS, tag);
+      for (const [k, v] of Object.entries(attrs)) el.setAttribute(k, v);
+      parent.appendChild(el);
+      return el;
+    }
+    const w = 1200, h = 820;
+    const margin = { top: 50, right: 40, bottom: 80, left: 120 };
+    const left = margin.left, right = w - margin.right, top = margin.top, bottom = h - margin.bottom;
+    const plotW = right - left, plotH = bottom - top;
+
+    add('line', { x1: left, y1: top, x2: left, y2: bottom, class: 'axis' });
+    add('line', { x1: left, y1: bottom, x2: right, y2: bottom, class: 'axis' });
+    add('line', { x1: left, y1: top, x2: right, y2: top, class: 'axis' });
+    add('line', { x1: right, y1: top, x2: right, y2: bottom, class: 'axis' });
+
+    const xTicks = [0,5,10,15,20];
+    xTicks.forEach(t => {
+      const x = left + (t/20)*plotW;
+      add('line', { x1: x, y1: top, x2: x, y2: bottom, class: 'grid' });
+      const txt = add('text', { x, y: bottom + 36, 'text-anchor': 'middle', class: 'tick' });
+      txt.textContent = t;
+    });
+
+    const yVals = [1,1e-1,1e-2,1e-3,1e-4,1e-5];
+    yVals.forEach(v => {
+      const y = bottom - ((Math.log10(v)+5)/5) * plotH;
+      add('line', { x1: left, y1: y, x2: right, y2: y, class: 'grid' });
+      const txt = add('text', { x: left - 16, y: y + 7, 'text-anchor': 'end', class: 'tick' });
+      txt.textContent = v === 1 ? '10^0' : `10^${Math.log10(v)}`;
+    });
+
+    const title = add('text', { x: w/2, y: 36, 'text-anchor': 'middle', class: 'label' });
+    title.textContent = 'BER vs SNR - AWGN Channel';
+    const ylab = add('text', { x: 30, y: h/2, transform: `rotate(-90 30 ${h/2})`, 'text-anchor': 'middle', class: 'label' });
+    ylab.textContent = 'Bit Error Rate';
+    const xlab = add('text', { x: w/2, y: h - 20, 'text-anchor': 'middle', class: 'label' });
+    xlab.textContent = 'E_b/N_0 (dB)';
+
+    const snr = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20];
+    const bpsk = [0.078615,0.0562125,0.03749,0.0229275,0.01249,0.0061675,0.0023775,0.0008025,0.000185,2.75e-05,2.5e-06,1.25e-06,1.25e-06,1.25e-06,1.25e-06,1.25e-06,1.25e-06,1.25e-06,1.25e-06,1.25e-06,1.25e-06];
+    const qpsk = [0.0787225,0.055925,0.037185,0.02303,0.0122875,0.0059275,0.0024475,0.0007,0.0002,3.75e-05,2.5e-06,1.25e-06,1.25e-06,1.25e-06,1.25e-06,1.25e-06,1.25e-06,1.25e-06,1.25e-06,1.25e-06,1.25e-06];
+    const qam = [0.140877,0.119182,0.0973725,0.0772075,0.058845,0.041905,0.027395,0.017305,0.00935,0.004515,0.0017975,0.0005525,0.000145,2.5e-05,2.5e-06,1.25e-06,1.25e-06,1.25e-06,1.25e-06,1.25e-06,1.25e-06];
+    function pts(vals) {
+      return vals.map((v,i) => {
+        const x = left + (snr[i] / 20) * plotW;
+        const y = bottom - ((Math.log10(v) + 5) / 5) * plotH;
+        return `${x},${y}`;
+      }).join(' ');
+    }
+    add('polyline', { points: pts(bpsk), class: 'line-bpsk' });
+    add('polyline', { points: pts(qpsk), class: 'line-qpsk' });
+    add('polyline', { points: pts(qam), class: 'line-qam' });
+
+    const markers = [
+      ['circle', '#1f77b4', bpsk],
+      ['square', '#d62728', qpsk],
+      ['triangle', '#f4a300', qam]
+    ];
+    markers.forEach(([shape, color, vals]) => {
+      vals.forEach((v, i) => {
+        if ([0,2,4,6,8,10,12,14,16,18,20].includes(i)) {
+          const x = left + (snr[i] / 20) * plotW;
+          const y = bottom - ((Math.log10(v) + 5) / 5) * plotH;
+          if (shape === 'circle') add('circle', { cx: x, cy: y, r: 5, fill: 'none', stroke: color, 'stroke-width': 2 });
+          if (shape === 'square') add('rect', { x: x - 5, y: y - 5, width: 10, height: 10, fill: 'none', stroke: color, 'stroke-width': 2 });
+          if (shape === 'triangle') add('polygon', { points: `${x},${y-7} ${x-7},${y+7} ${x+7},${y+7}`, fill: 'none', stroke: color, 'stroke-width': 2 });
+        }
+      });
+    });
+
+    const legend = add('g', {});
+    const lx = 145, ly = 460;
+    [['BPSK','#1f77b4','circle'], ['QPSK','#d62728','square'], ['16-QAM','#f4a300','triangle']].forEach(([label,color,shape],idx) => {
+      const x = lx + idx*125;
+      if (shape === 'circle') add('circle', { cx: x+20, cy: ly, r: 6, fill: 'none', stroke: color, 'stroke-width': 2 }, legend);
+      if (shape === 'square') add('rect', { x: x+14, y: ly-6, width: 12, height: 12, fill: 'none', stroke: color, 'stroke-width': 2 }, legend);
+      if (shape === 'triangle') add('polygon', { points: `${x+20},${ly-8} ${x+13},${ly+8} ${x+27},${ly+8}`, fill: 'none', stroke: color, 'stroke-width': 2 }, legend);
+      const txt = add('text', { x: x+52, y: ly + 6, class: 'legend' }, legend);
+      txt.textContent = label;
+    });
+  ]]></script>
+</svg>
