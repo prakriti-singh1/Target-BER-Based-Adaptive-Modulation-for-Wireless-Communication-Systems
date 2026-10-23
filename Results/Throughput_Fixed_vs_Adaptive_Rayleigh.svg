@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="820" viewBox="0 0 1200 820">
+  <defs>
+    <style>
+      text { font-family: 'DejaVu Sans', Arial, sans-serif; }
+      .axis { stroke: #111; stroke-width: 1.5; }
+      .grid { stroke: #222; stroke-width: 1; opacity: 0.75; }
+      .label { font-size: 28px; fill: #111; }
+      .tick { font-size: 20px; fill: #111; }
+      .legend { font-size: 28px; fill: #111; }
+    </style>
+  </defs>
+  <rect x="0" y="0" width="1200" height="820" fill="#f3f3f3"/>
+  <g id="chart"></g>
+  <script><![CDATA[
+    const svgNS = 'http://www.w3.org/2000/svg';
+    const chart = document.getElementById('chart');
+    function add(tag, attrs, parent = chart) {
+      const el = document.createElementNS(svgNS, tag);
+      for (const [k, v] of Object.entries(attrs)) el.setAttribute(k, v);
+      parent.appendChild(el);
+      return el;
+    }
+    const w = 1200, h = 820;
+    const margin = { top: 70, right: 40, bottom: 80, left: 120 };
+    const left = margin.left, right = w - margin.right, top = margin.top, bottom = h - margin.bottom;
+    const plotW = right - left, plotH = bottom - top;
+    add('line', { x1: left, y1: top, x2: left, y2: bottom, class: 'axis' });
+    add('line', { x1: left, y1: bottom, x2: right, y2: bottom, class: 'axis' });
+    add('line', { x1: left, y1: top, x2: right, y2: top, class: 'axis' });
+    add('line', { x1: right, y1: top, x2: right, y2: bottom, class: 'axis' });
+    const xTicks = [0,5,10,15,20];
+    xTicks.forEach(t => {
+      const x = left + (t/20)*plotW;
+      add('line', { x1: x, y1: top, x2: x, y2: bottom, class: 'grid' });
+      const txt = add('text', { x, y: bottom + 36, 'text-anchor': 'middle', class: 'tick' });
+      txt.textContent = t;
+    });
+    const yTicks = [0.5,1,1.5,2,2.5,3,3.5,4];
+    yTicks.forEach(t => {
+      const y = bottom - ((t-0.5)/3.5)*plotH;
+      add('line', { x1: left, y1: y, x2: right, y2: y, class: 'grid' });
+      const txt = add('text', { x: left - 16, y: y + 7, 'text-anchor': 'end', class: 'tick' });
+      txt.textContent = t;
+    });
+    const title = add('text', { x: w/2, y: 36, 'text-anchor': 'middle', class: 'label' });
+    title.textContent = 'Throughput: Fixed vs Adaptive – Rayleigh';
+    const ylab = add('text', { x: 30, y: h/2, transform: `rotate(-90 30 ${h/2})`, 'text-anchor': 'middle', class: 'label' });
+    ylab.textContent = 'Normalized Throughput (bits/symbol)';
+    const xlab = add('text', { x: w/2, y: h - 20, 'text-anchor': 'middle', class: 'label' });
+    xlab.textContent = 'E_b/N_0 (dB)';
+    const snr = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20];
+    const fixedBpsk = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1];
+    const fixedQpsk = [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2];
+    const fixedQam = [3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3];
+    const adapt1 = [0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,1,1,1,1,1,1,1,1,1,1,1,1,1];
+    const adapt2 = [0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,1,1,1,1,1,1,1,1,1,1,1];
+    const adapt3 = [0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,1,1,1,1,1,1,1,1,1];
+    function pts(vals) {
+      return vals.map((v,i) => {
+        const x = left + (snr[i]/20)*plotW;
+        const y = bottom - ((v - 0.5)/3.5)*plotH;
+        return `${x},${y}`;
+      }).join(' ');
+    }
+    const c1 = '#1f77b4', c2 = '#d62728', c3 = '#f4a300', c4 = '#8a2be2', c5 = '#2ca02c', c6 = '#1f77b4';
+    add('polyline', { points: pts(fixedBpsk), fill: 'none', stroke: c1, 'stroke-width': 2.5 });
+    add('polyline', { points: pts(fixedQpsk), fill: 'none', stroke: c2, 'stroke-width': 2.5 });
+    add('polyline', { points: pts(fixedQam), fill: 'none', stroke: c3, 'stroke-width': 2.5 });
+    add('polyline', { points: pts(adapt1), fill: 'none', stroke: c4, 'stroke-width': 2.5 });
+    add('polyline', { points: pts(adapt2), fill: 'none', stroke: c5, 'stroke-width': 2.5 });
+    add('polyline', { points: pts(adapt3), fill: 'none', stroke: c6, 'stroke-width': 2.5 });
+    const legend = add('g', {});
+    const lx = 250, ly = 150;
+    const names = [
+      ['Fixed BPSK', c1, 'circle'],
+      ['Fixed QPSK', c2, 'square'],
+      ['Fixed 16-QAM', c3, 'triangle'],
+      ['Adaptive (target 10^-2)', c4, 'diamond'],
+      ['Adaptive (target 10^-3)', c5, 'cross'],
+      ['Adaptive (target 10^-4)', c6, 'circle']
+    ];
+    names.forEach(([label,color,shape],idx) => {
+      const y = ly + idx*32;
+      if (shape === 'circle') add('circle', { cx: lx + 12, cy: y, r: 5, fill: 'none', stroke: color, 'stroke-width': 2 }, legend);
+      if (shape === 'square') add('rect', { x: lx + 7, y: y - 5, width: 10, height: 10, fill: 'none', stroke: color, 'stroke-width': 2 }, legend);
+      if (shape === 'triangle') add('polygon', { points: `${lx+12},${y-7} ${lx+5},${y+7} ${lx+19},${y+7}`, fill: 'none', stroke: color, 'stroke-width': 2 }, legend);
+      if (shape === 'diamond') add('polygon', { points: `${lx+12},${y-7} ${lx+5},${y} ${lx+12},${y+7} ${lx+19},${y}`, fill: 'none', stroke: color, 'stroke-width': 2 }, legend);
+      if (shape === 'cross') {
+        add('line', { x1: lx + 6, y1: y - 6, x2: lx + 18, y2: y + 6, stroke: color, 'stroke-width': 2 }, legend);
+        add('line', { x1: lx + 6, y1: y + 6, x2: lx + 18, y2: y - 6, stroke: color, 'stroke-width': 2 }, legend);
+      }
+      const txt = add('text', { x: lx + 32, y: y + 5, class: 'legend' }, legend);
+      txt.textContent = label;
+    });
+  ]]></script>
+</svg>
