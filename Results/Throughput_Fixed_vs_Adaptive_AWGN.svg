@@ -1,99 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="820" viewBox="0 0 1200 820">
-  <defs>
-    <style>
-      text { font-family: 'DejaVu Sans', Arial, sans-serif; }
-      .axis { stroke: #111; stroke-width: 1.5; }
-      .grid { stroke: #222; stroke-width: 1; opacity: 0.75; }
-      .label { font-size: 28px; fill: #111; }
-      .tick { font-size: 20px; fill: #111; }
-      .legend { font-size: 28px; fill: #111; }
-      .line-fixed { fill: none; stroke: #111; stroke-width: 1.8; }
-    </style>
-  </defs>
-  <rect x="0" y="0" width="1200" height="820" fill="#f3f3f3"/>
-  <g id="chart"></g>
-  <script><![CDATA[
-    const svgNS = 'http://www.w3.org/2000/svg';
-    const chart = document.getElementById('chart');
-    function add(tag, attrs, parent = chart) {
-      const el = document.createElementNS(svgNS, tag);
-      for (const [k, v] of Object.entries(attrs)) el.setAttribute(k, v);
-      parent.appendChild(el);
-      return el;
-    }
-    const w = 1200, h = 820;
-    const margin = { top: 70, right: 40, bottom: 80, left: 120 };
-    const left = margin.left, right = w - margin.right, top = margin.top, bottom = h - margin.bottom;
-    const plotW = right - left, plotH = bottom - top;
-    add('line', { x1: left, y1: top, x2: left, y2: bottom, class: 'axis' });
-    add('line', { x1: left, y1: bottom, x2: right, y2: bottom, class: 'axis' });
-    add('line', { x1: left, y1: top, x2: right, y2: top, class: 'axis' });
-    add('line', { x1: right, y1: top, x2: right, y2: bottom, class: 'axis' });
-    const xTicks = [0,5,10,15,20];
-    xTicks.forEach(t => {
-      const x = left + (t/20)*plotW;
-      add('line', { x1: x, y1: top, x2: x, y2: bottom, class: 'grid' });
-      const txt = add('text', { x, y: bottom + 36, 'text-anchor': 'middle', class: 'tick' });
-      txt.textContent = t;
-    });
-    const yTicks = [0.5,1,1.5,2,2.5,3,3.5,4];
-    yTicks.forEach(t => {
-      const y = bottom - ((t-0.5)/3.5)*plotH;
-      add('line', { x1: left, y1: y, x2: right, y2: y, class: 'grid' });
-      const txt = add('text', { x: left - 16, y: y + 7, 'text-anchor': 'end', class: 'tick' });
-      txt.textContent = t;
-    });
-    const title = add('text', { x: w/2, y: 36, 'text-anchor': 'middle', class: 'label' });
-    title.textContent = 'Throughput: Fixed vs Adaptive - AWGN';
-    const ylab = add('text', { x: 30, y: h/2, transform: `rotate(-90 30 ${h/2})`, 'text-anchor': 'middle', class: 'label' });
-    ylab.textContent = 'Normalized Throughput (bits/symbol)';
-    const xlab = add('text', { x: w/2, y: h - 20, 'text-anchor': 'middle', class: 'label' });
-    xlab.textContent = 'E_b/N_0 (dB)';
-
-    const snr = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20];
-    const fixedBpsk = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1];
-    const fixedQpsk = [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2];
-    const fixedQam = [3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3];
-    const adapt1 = [0.5,0.5,0.5,0.5,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1];
-    const adapt2 = [0.5,0.5,0.5,0.5,0.5,0.5,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1];
-    const adapt3 = [0.5,0.5,0.5,0.5,0.5,0.5,0.5,1,1,1,1,1,1,1,1,1,1,1,1,1,1];
-    function pts(vals) {
-      return vals.map((v,i) => {
-        const x = left + (snr[i]/20)*plotW;
-        const y = bottom - ((v - 0.5)/3.5)*plotH;
-        return `${x},${y}`;
-      }).join(' ');
-    }
-    const c1 = '#1f77b4', c2 = '#d62728', c3 = '#f4a300', c4 = '#8a2be2', c5 = '#2ca02c', c6 = '#1f77b4';
-    add('polyline', { points: pts(fixedBpsk), fill: 'none', stroke: c1, 'stroke-width': 2.5 });
-    add('polyline', { points: pts(fixedQpsk), fill: 'none', stroke: c2, 'stroke-width': 2.5 });
-    add('polyline', { points: pts(fixedQam), fill: 'none', stroke: c3, 'stroke-width': 2.5 });
-    add('polyline', { points: pts(adapt1), fill: 'none', stroke: c4, 'stroke-width': 2.5 });
-    add('polyline', { points: pts(adapt2), fill: 'none', stroke: c5, 'stroke-width': 2.5 });
-    add('polyline', { points: pts(adapt3), fill: 'none', stroke: c6, 'stroke-width': 2.5 });
-
-    const legend = add('g', {});
-    const lx = 250, ly = 150;
-    const names = [
-      ['Fixed BPSK', c1, 'circle'],
-      ['Fixed QPSK', c2, 'square'],
-      ['Fixed 16-QAM', c3, 'triangle'],
-      ['Adaptive (target 10^-2)', c4, 'diamond'],
-      ['Adaptive (target 10^-3)', c5, 'cross'],
-      ['Adaptive (target 10^-4)', c6, 'circle']
-    ];
-    names.forEach(([label,color,shape],idx) => {
-      const y = ly + idx*32;
-      if (shape === 'circle') add('circle', { cx: lx + 12, cy: y, r: 5, fill: 'none', stroke: color, 'stroke-width': 2 }, legend);
-      if (shape === 'square') add('rect', { x: lx + 7, y: y - 5, width: 10, height: 10, fill: 'none', stroke: color, 'stroke-width': 2 }, legend);
-      if (shape === 'triangle') add('polygon', { points: `${lx+12},${y-7} ${lx+5},${y+7} ${lx+19},${y+7}`, fill: 'none', stroke: color, 'stroke-width': 2 }, legend);
-      if (shape === 'diamond') add('polygon', { points: `${lx+12},${y-7} ${lx+5},${y} ${lx+12},${y+7} ${lx+19},${y}`, fill: 'none', stroke: color, 'stroke-width': 2 }, legend);
-      if (shape === 'cross') {
-        add('line', { x1: lx + 6, y1: y - 6, x2: lx + 18, y2: y + 6, stroke: color, 'stroke-width': 2 }, legend);
-        add('line', { x1: lx + 6, y1: y + 6, x2: lx + 18, y2: y - 6, stroke: color, 'stroke-width': 2 }, legend);
-      }
-      const txt = add('text', { x: lx + 32, y: y + 5, class: 'legend' }, legend);
-      txt.textContent = label;
-    });
-  ]]></script>
+  <rect width="1200" height="820" fill="#f1f1f1"/>
+  <g stroke="#111" stroke-width="1.5" fill="none">
+    <line x1="120" y1="70" x2="120" y2="700"/>
+    <line x1="120" y1="700" x2="1100" y2="700"/>
+    <line x1="120" y1="70" x2="1100" y2="70"/>
+    <line x1="1100" y1="70" x2="1100" y2="700"/>
+  </g>
+  <g stroke="#222" stroke-width="1" opacity="0.8">
+    <line x1="120" y1="170" x2="1100" y2="170"/>
+    <line x1="120" y1="270" x2="1100" y2="270"/>
+    <line x1="120" y1="370" x2="1100" y2="370"/>
+    <line x1="120" y1="470" x2="1100" y2="470"/>
+    <line x1="120" y1="570" x2="1100" y2="570"/>
+    <line x1="220" y1="70" x2="220" y2="700"/>
+    <line x1="420" y1="70" x2="420" y2="700"/>
+    <line x1="620" y1="70" x2="620" y2="700"/>
+    <line x1="820" y1="70" x2="820" y2="700"/>
+    <line x1="1020" y1="70" x2="1020" y2="700"/>
+  </g>
+  <g font-family="Arial, sans-serif" font-size="18" fill="#111">
+    <text x="120" y="735" text-anchor="end">0.5</text>
+    <text x="120" y="635" text-anchor="end">1</text>
+    <text x="120" y="535" text-anchor="end">1.5</text>
+    <text x="120" y="435" text-anchor="end">2</text>
+    <text x="120" y="335" text-anchor="end">2.5</text>
+    <text x="120" y="235" text-anchor="end">3</text>
+    <text x="120" y="135" text-anchor="end">3.5</text>
+    <text x="220" y="720" text-anchor="middle">0</text>
+    <text x="420" y="720" text-anchor="middle">5</text>
+    <text x="620" y="720" text-anchor="middle">10</text>
+    <text x="820" y="720" text-anchor="middle">15</text>
+    <text x="1020" y="720" text-anchor="middle">20</text>
+    <text x="610" y="40" text-anchor="middle" font-size="30" font-weight="700">Throughput: Fixed vs Adaptive - AWGN</text>
+    <text x="40" y="390" transform="rotate(-90 40 390)" text-anchor="middle" font-size="28">Normalized Throughput (bits/symbol)</text>
+    <text x="610" y="780" text-anchor="middle" font-size="28">E_b/N_0 (dB)</text>
+  </g>
+  <g fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <polyline points="120,500 220,500 320,500 420,500 520,500 620,500 720,500 820,500 920,500 1020,500" stroke="#1f77b4"/>
+    <polyline points="120,350 220,350 320,350 420,350 520,350 620,350 720,350 820,350 920,350 1020,350" stroke="#d62728"/>
+    <polyline points="120,220 220,220 320,220 420,220 520,220 620,220 720,220 820,220 920,220 1020,220" stroke="#f4a300"/>
+    <polyline points="120,500 220,500 320,500 420,500 520,500 620,500 720,500 820,500 920,500 1020,500" stroke="#8a2be2"/>
+    <polyline points="120,500 220,500 320,500 420,500 520,500 620,500 720,500 820,500 920,500 1020,500" stroke="#2ca02c"/>
+    <polyline points="120,500 220,500 320,500 420,500 520,500 620,500 720,500 820,500 920,500 1020,500" stroke="#1f77b4"/>
+  </g>
+  <g font-family="Arial, sans-serif" font-size="22" fill="#111">
+    <rect x="160" y="110" width="290" height="160" fill="#e8e8e8" stroke="#111" stroke-width="1.5"/>
+    <line x1="180" y1="140" x2="210" y2="140" stroke="#1f77b4" stroke-width="2.5"/>
+    <circle cx="195" cy="140" r="6" fill="none" stroke="#1f77b4" stroke-width="2"/>
+    <text x="220" y="148">Fixed BPSK</text>
+    <line x1="180" y1="170" x2="210" y2="170" stroke="#d62728" stroke-width="2.5"/>
+    <rect x="190" y="164" width="12" height="12" fill="none" stroke="#d62728" stroke-width="2"/>
+    <text x="220" y="178">Fixed QPSK</text>
+    <line x1="180" y1="200" x2="210" y2="200" stroke="#f4a300" stroke-width="2.5"/>
+    <polygon points="195,192 189,204 201,204" fill="none" stroke="#f4a300" stroke-width="2"/>
+    <text x="220" y="208">Fixed 16-QAM</text>
+    <line x1="180" y1="230" x2="210" y2="230" stroke="#8a2be2" stroke-width="2.5"/>
+    <polygon points="195,221 189,233 195,245 201,233" fill="none" stroke="#8a2be2" stroke-width="2"/>
+    <text x="220" y="238">Adaptive (target 10^-2)</text>
+    <line x1="180" y1="260" x2="210" y2="260" stroke="#2ca02c" stroke-width="2.5"/>
+    <line x1="188" y1="252" x2="202" y2="268" stroke="#2ca02c" stroke-width="2"/>
+    <line x1="188" y1="268" x2="202" y2="252" stroke="#2ca02c" stroke-width="2"/>
+    <text x="220" y="268">Adaptive (target 10^-3)</text>
+  </g>
 </svg>

@@ -1,0 +1,7 @@
+Channel,TargetBER,BPSK_to_QPSK_dB,QPSK_to_16QAM_dB
+AWGN,0.01,5,8
+AWGN,0.001,7,11
+AWGN,0.0001,9,13
+Rayleigh,0.01,14,17
+Rayleigh,0.001,NaN,NaN
+Rayleigh,0.0001,NaN,NaN

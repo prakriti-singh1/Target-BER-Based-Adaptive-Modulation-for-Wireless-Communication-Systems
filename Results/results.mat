@@ -1,0 +1,998 @@
+# Created by Octave 8.4.0, Wed Sep 09 19:55:49 2026 UTC <root@vm>
+# name: results
+# type: scalar struct
+# ndims: 2
+ 1 1
+# length: 4
+# name: schemes
+# type: cell
+# rows: 1
+# columns: 3
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+BPSK
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+QPSK
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 5
+16QAM
+
+# name: channels
+# type: cell
+# rows: 1
+# columns: 2
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+AWGN
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 8
+Rayleigh
+
+# name: snr
+# type: double_range
+# base, limit, increment
+0 20 1
+
+# name: BER
+# type: scalar struct
+# ndims: 2
+ 1 1
+# length: 3
+# name: BPSK
+# type: scalar struct
+# ndims: 2
+ 1 1
+# length: 2
+# name: AWGN
+# type: matrix
+# rows: 1
+# columns: 21
+ 0.078615000000000004 0.056212499999999999 0.037490000000000002 0.0229275 0.012489999999999999 0.0061675000000000002 0.0023774999999999998 0.00080250000000000004 0.000185 2.7500000000000001e-05 2.5000000000000002e-06 1.2500000000000001e-06 1.2500000000000001e-06 1.2500000000000001e-06 1.2500000000000001e-06 1.2500000000000001e-06 1.2500000000000001e-06 1.2500000000000001e-06 1.2500000000000001e-06 1.2500000000000001e-06 1.2500000000000001e-06
+
+# name: Rayleigh
+# type: matrix
+# rows: 1
+# columns: 21
+ 0.14727750000000001 0.12636 0.10901 0.091827500000000006 0.076947500000000002 0.064102500000000007 0.053132499999999999 0.043185000000000001 0.034777500000000003 0.0283225 0.0230975 0.018534999999999999 0.0150975 0.011735000000000001 0.0094199999999999996 0.0077524999999999998 0.0062275000000000004 0.00479 0.0038024999999999999 0.0031275000000000001 0.0024599999999999999
+
+# name: QPSK
+# type: scalar struct
+# ndims: 2
+ 1 1
+# length: 2
+# name: AWGN
+# type: matrix
+# rows: 1
+# columns: 21
+ 0.078722500000000001 0.055925000000000002 0.037185000000000003 0.023029999999999998 0.0122875 0.0059274999999999996 0.0024475 0.00069999999999999999 0.00020000000000000001 3.7499999999999997e-05 2.5000000000000002e-06 1.2500000000000001e-06 1.2500000000000001e-06 1.2500000000000001e-06 1.2500000000000001e-06 1.2500000000000001e-06 1.2500000000000001e-06 1.2500000000000001e-06 1.2500000000000001e-06 1.2500000000000001e-06 1.2500000000000001e-06
+
+# name: Rayleigh
+# type: matrix
+# rows: 1
+# columns: 21
+ 0.14592749999999999 0.12680749999999999 0.10867250000000001 0.091507500000000006 0.076960000000000001 0.063905000000000003 0.052192500000000003 0.043225 0.035782500000000002 0.028985 0.023137499999999998 0.0185325 0.01536 0.0121225 0.0093699999999999999 0.0076550000000000003 0.0062024999999999997 0.0049075000000000004 0.00396 0.0029275 0.0024325000000000002
+
+# name: 16QAM
+# type: scalar struct
+# ndims: 2
+ 1 1
+# length: 2
+# name: AWGN
+# type: matrix
+# rows: 1
+# columns: 21
+ 0.14087749999999999 0.1191825 0.097372500000000001 0.077207499999999998 0.058845000000000001 0.041904999999999998 0.027394999999999999 0.017305000000000001 0.0093500000000000007 0.0045149999999999999 0.0017975000000000001 0.00055250000000000004 0.000145 2.5000000000000001e-05 2.5000000000000002e-06 1.2500000000000001e-06 1.2500000000000001e-06 1.2500000000000001e-06 1.2500000000000001e-06 1.2500000000000001e-06 1.2500000000000001e-06
+
+# name: Rayleigh
+# type: matrix
+# rows: 1
+# columns: 21
+ 0.19602749999999999 0.17768500000000001 0.15708250000000001 0.13712250000000001 0.11990000000000001 0.10358000000000001 0.087662500000000004 0.074230000000000004 0.061850000000000002 0.050917499999999997 0.042827499999999998 0.034775 0.027932499999999999 0.022797499999999998 0.018967500000000002 0.015115 0.0119825 0.0093550000000000005 0.0076350000000000003 0.0059899999999999997 0.0049125000000000002
+
+# name: adaptive_selected
+# type: scalar struct
+# ndims: 2
+ 1 1
+# length: 2
+# name: AWGN
+# type: scalar struct
+# ndims: 2
+ 1 1
+# length: 3
+# name: t1
+# type: cell
+# rows: 1
+# columns: 21
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+BPSK
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+BPSK
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+BPSK
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+BPSK
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+BPSK
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+QPSK
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+QPSK
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+QPSK
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 5
+16QAM
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 5
+16QAM
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 5
+16QAM
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 5
+16QAM
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 5
+16QAM
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 5
+16QAM
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 5
+16QAM
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 5
+16QAM
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 5
+16QAM
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 5
+16QAM
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 5
+16QAM
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 5
+16QAM
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 5
+16QAM
+
+# name: t2
+# type: cell
+# rows: 1
+# columns: 21
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+BPSK
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+BPSK
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+BPSK
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+BPSK
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+BPSK
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+BPSK
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+BPSK
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+QPSK
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+QPSK
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+QPSK
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+QPSK
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 5
+16QAM
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 5
+16QAM
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 5
+16QAM
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 5
+16QAM
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 5
+16QAM
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 5
+16QAM
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 5
+16QAM
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 5
+16QAM
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 5
+16QAM
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 5
+16QAM
+
+# name: t3
+# type: cell
+# rows: 1
+# columns: 21
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+BPSK
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+BPSK
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+BPSK
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+BPSK
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+BPSK
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+BPSK
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+BPSK
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+BPSK
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+BPSK
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+QPSK
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+QPSK
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+QPSK
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+QPSK
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 5
+16QAM
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 5
+16QAM
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 5
+16QAM
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 5
+16QAM
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 5
+16QAM
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 5
+16QAM
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 5
+16QAM
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 5
+16QAM
+
+# name: Rayleigh
+# type: scalar struct
+# ndims: 2
+ 1 1
+# length: 3
+# name: t1
+# type: cell
+# rows: 1
+# columns: 21
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+BPSK
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+BPSK
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+BPSK
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+BPSK
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+BPSK
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+BPSK
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+BPSK
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+BPSK
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+BPSK
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+BPSK
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+BPSK
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+BPSK
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+BPSK
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+BPSK
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+QPSK
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+QPSK
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+QPSK
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 5
+16QAM
+
+# name: t2
+# type: cell
+# rows: 1
+# columns: 21
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+BPSK
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+BPSK
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+BPSK
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+BPSK
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+BPSK
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+BPSK
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+BPSK
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+BPSK
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+BPSK
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+BPSK
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+BPSK
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+BPSK
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+BPSK
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+BPSK
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+BPSK
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+BPSK
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+BPSK
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+BPSK
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+BPSK
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+BPSK
+
+# name: t3
+# type: cell
+# rows: 1
+# columns: 21
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+BPSK
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+BPSK
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+BPSK
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+BPSK
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+BPSK
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+BPSK
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+BPSK
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+BPSK
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+BPSK
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+BPSK
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+BPSK
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+BPSK
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+BPSK
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+BPSK
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+BPSK
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+BPSK
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+BPSK
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+BPSK
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+BPSK
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+BPSK
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+BPSK
+
+# name: switch_table
+# type: cell
+# rows: 6
+# columns: 4
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+AWGN
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+AWGN
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 4
+AWGN
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 8
+Rayleigh
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 8
+Rayleigh
+
+# name: <cell-element>
+# type: sq_string
+# elements: 1
+# length: 8
+Rayleigh
+
+# name: <cell-element>
+# type: scalar
+0.01
+
+# name: <cell-element>
+# type: scalar
+0.001
+
+# name: <cell-element>
+# type: scalar
+0.0001
+
+# name: <cell-element>
+# type: scalar
+0.01
+
+# name: <cell-element>
+# type: scalar
+0.001
+
+# name: <cell-element>
+# type: scalar
+0.0001
+
+# name: <cell-element>
+# type: scalar
+5
+
+# name: <cell-element>
+# type: scalar
+7
+
+# name: <cell-element>
+# type: scalar
+9
+
+# name: <cell-element>
+# type: scalar
+14
+
+# name: <cell-element>
+# type: scalar
+NaN
+
+# name: <cell-element>
+# type: scalar
+NaN
+
+# name: <cell-element>
+# type: scalar
+8
+
+# name: <cell-element>
+# type: scalar
+11
+
+# name: <cell-element>
+# type: scalar
+13
+
+# name: <cell-element>
+# type: scalar
+17
+
+# name: <cell-element>
+# type: scalar
+NaN
+
+# name: <cell-element>
+# type: scalar
+NaN
+
+# name: snr_range
+# type: double_range
+# base, limit, increment
+0 20 1
+
+# name: target_bers
+# type: matrix
+# rows: 1
+# columns: 3
+ 0.01 0.001 0.0001
